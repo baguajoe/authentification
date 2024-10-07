@@ -19,6 +19,9 @@ export const Navbar = () => {
 					<Link to="/login">
 						<button className="btn btn-primary">Login</button>
 					</Link>
+					<button className="btn btn-primary ml-2" onClick={handleLogout}>
+						Logout
+					</button>
 				</div>
 			</div>
 		</nav>
