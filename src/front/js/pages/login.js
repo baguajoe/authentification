@@ -29,7 +29,7 @@ export const Login = () => {
 		<div className="text-center mt-5">
 			<h1>Login</h1>
 			
-				<div>
+				<div className="d-flex flex-column gap-3 w-25 justify-content-center mx-auto">
 					<input 
 						type="text" 
 						placeholder="email" 
@@ -44,7 +44,7 @@ export const Login = () => {
 						onChange={(e) => setPassword(e.target.value)} 
 						required
 					/>
-					<button onClick={handleClick}>Login</button>
+					<button className="btn btn-primary w-25 mx-auto mt-3" onClick={handleClick}>Login</button>
 					<Link to="/signup"className="mt-4">click here to signup</Link>
 				</div>
 			

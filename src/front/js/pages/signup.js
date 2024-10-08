@@ -42,7 +42,7 @@ export const Signup = () => {
 		<div className="text-center mt-5">
 			<h1>Signup</h1>
 
-			<div>
+			<div className="d-flex flex-column gap-3 w-25 mx-auto">
 				<input
 					type="text"
 					placeholder="email"
@@ -64,7 +64,7 @@ export const Signup = () => {
 					onChange={(e) => setConfirmPassword(e.target.value)}
 					required
 				/>
-				<button onClick={handleClick}>Signup</button>
+				<button className="btn btn-primary w-50 mx-auto mt-3" onClick={handleClick}>Signup</button>
 			</div>
 
 

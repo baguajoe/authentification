@@ -1,13 +1,19 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
+	const navigate = useNavigate();
 
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
 	const handleLogout = () => {
-		setIsLoggedIn(false);
+
+		sessionStorage.removeItem("token");
+		alert("You've been logged out successfully");
+		navigate("/");
 	};
+
+	const isLoggedIn = !!sessionStorage.getItem("token");
 
 	return (
 		<nav className="navbar navbar-light bg-light">
@@ -16,13 +22,20 @@ export const Navbar = () => {
 					<span className="navbar-brand mb-0 h1">React Boilerplate</span>
 				</Link>
 				<div className="ml-auto">
-					<Link to="/login">
-						<button className="btn btn-primary">Login</button>
-					</Link>
-					<button className="btn btn-primary ml-2" onClick={handleLogout}>
-						Logout
-					</button>
+					{isLoggedIn ? (
+						<button className="btn btn-primary ms-2" onClick={handleLogout}>
+							Logout
+						</button>
+					) : (
+						<Link to="/login">
+							<button className="btn btn-primary">Login</button>
+						</Link>
+					)}
+
+
 				</div>
+
+				
 			</div>
 		</nav>
 	);
