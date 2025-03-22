@@ -2,7 +2,7 @@
 This module takes care of starting the API Server, Loading the DB and Adding the endpoints
 """
 from flask import Flask, request, jsonify, url_for, Blueprint
-from api.models import db, User
+from api.models import db, User, Donation
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
 from flask_jwt_extended import create_access_token
@@ -55,4 +55,22 @@ def create_private():
     
     return jsonify(log_in_as=current_user), 200
    
+
+@api.route('/api/donations/total-raised', methods=['GET'])
+def total_raised():
+    total = db.session.query(db.func.sum(Donation.amount)).scalar() or 0
+    return jsonify({"total": total})
+
+@api.route('/donations', methods=['POST'])
+def add_donation():
+    data = request.get_json()
+    new_donation = Donation(donor_name=data['donor_name'], amount=data['amount'])
+    db.session.add(new_donation)
+    db.session.commit()
+    return jsonify({"message": "Donation added successfully!"}), 201
+
+if __name__ == "__main__":
+    db.create_all()
+    app.run(debug=True)
+
 
